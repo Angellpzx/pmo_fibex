@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMO FIBEX TELECOM - Dashboard de Gestión y Seguimiento</title>
+  
+  <!-- Estilos del Sistema -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  
+  <!-- Fuentes e Iconos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       BARRA DE NAVEGACIÓN SUPERIOR
+       ========================================================================== -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <span class="brand-badge">PMO</span>
+        <div>
+          <div class="brand-title">FIBEX TELECOM &bull; PORTAFOLIO DE PROYECTOS</div>
+          <div class="brand-subtitle">Dashboard de Estatus y Seguimiento Microsoft Planner</div>
+        </div>
+      </div>
+
+      <nav class="navbar-nav">
+        <button class="nav-btn active" data-view="general">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a7 7 0 1 0 7 7A7 7 0 0 0 8 1zm0 12.6A5.6 5.6 0 1 1 13.6 8 5.61 5.61 0 0 1 8 13.6z"/><path d="M8 4a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6.8A2.8 2.8 0 1 1 10.8 8 2.8 2.8 0 0 1 8 10.8z"/></svg>
+          Vista General
+        </button>
+        <button class="nav-btn" data-view="hubs">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h11A1.5 1.5 0 0 1 15 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-11zM2.5 2a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5h-11z"/><path d="M3 4h10v2H3V4zm0 4h10v2H3V8zm0 4h10v1H3v-1z"/></svg>
+          HUBS
+        </button>
+        <button class="nav-btn" data-view="enlaces">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L7.335 10.994a2 2 0 0 1-2.828-2.828l1.372-1.372a2.001 2.001 0 0 1-.164-.252z"/><path d="M6.586 4.5 8 3.086a3 3 0 0 1 4.243 4.243l-1.372 1.371a2.002 2.002 0 0 1-.164.253l-1.371-1.372a1.002 1.002 0 0 0-.154-.199 2 2 0 0 1 .861-3.337L8.665 2.646a2 2 0 0 0-2.828 2.828l1.372 1.372c-.1.084-.192.174-.275.268l-.348-.614z"/></svg>
+          Enlaces Troncales
+        </button>
+        <button class="nav-btn" data-view="noc">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2z"/><path d="M2 10.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/></svg>
+          NOC (Red IP)
+        </button>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="btn-sync-sheets" id="btn-sync-sheets" title="Sincronizar datos en tiempo real con Google Sheets">
+          <svg id="sync-icon" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+          <span id="sync-btn-label">Sincronizar Sheets</span>
+        </button>
+
+        <label class="btn-upload" title="Subir nuevo archivo Excel exportado de Planner">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V10.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/></svg>
+          <span>Cargar Excel</span>
+          <input type="file" id="excel-file-input" accept=".xlsx, .xls">
+        </label>
+
+        <button class="btn-excel-export" id="btn-excel-all" title="Exportar consolidado de todos los proyectos a Excel (.xlsx)">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/><path d="M5.18 10.368 6.56 8.28 5.28 6.2h1.44l.64 1.168.648-1.168h1.44L8.168 8.28l1.38 2.088H8.108L7.36 9.112l-.748 1.256H5.18z"/></svg>
+          <span>Exportar Excel</span>
+        </button>
+
+        <button class="btn-export-all" id="btn-download-all" title="Descargar reporte completo consolidado en PDF">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+          <span>Descargar Todos</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       CONTENEDOR PRINCIPAL DE VISTAS
+       ========================================================================== -->
+  <main class="app-container">
+
+    <!-- ----------------------------------------------------------------------
+         VISTA 1: DASHBOARD GENERAL (HOJA PRINCIPAL)
+         ---------------------------------------------------------------------- -->
+    <section id="view-general" class="view-section active-view">
+      
+      <!-- Tarjeta Hero de Estado Global -->
+      <div class="hero-portfolio-card">
+        <div class="hero-header">
+          <div>
+            <h1 class="hero-title">Avance de proyectos</h1>
+            <p class="hero-subtitle">
+              Monitoreo ejecutivo en tiempo real de HUBs, Enlaces Troncales y Optimización de Red IP (NOC).
+              Haga clic en cualquiera de las secciones para acceder a su reporte detallado.
+            </p>
+            <div class="hero-report-date" id="hero-report-date" style="font-size: 13px; color: #94a3b8; margin-top: 8px; font-weight: 500; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <span id="hero-date-text">📅 Fecha de Reporte: Martes, 27 de Octubre de 2026</span>
+              <span id="hero-sync-badge" class="sync-badge-live">🟢 Conectado con Google Sheets</span>
+            </div>
+          </div>
+          <div class="portfolio-global-meter">
+            <div class="meter-circle-val" id="hero-global-percent">--%</div>
+            <div class="meter-info">
+              <span class="meter-title">Avance Portafolio Global</span>
+              <div class="meter-bar-container">
+                <div class="meter-bar-fill" id="hero-meter-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-kpis-grid">
+          <!-- 1. Tareas Totales -->
+          <div class="hero-kpi-item">
+            <div class="hero-kpi-icon icon-tasks">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>
+            </div>
+            <div class="hero-kpi-content">
+              <span class="hero-kpi-num" id="kpi-total-tasks">--</span>
+              <span class="hero-kpi-label">Tareas Totales</span>
+            </div>
+          </div>
+
+          <!-- 2. Tareas Completadas -->
+          <div class="hero-kpi-item">
+            <div class="hero-kpi-icon icon-done">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+            </div>
+            <div class="hero-kpi-content">
+              <span class="hero-kpi-num" id="kpi-done-tasks">--</span>
+              <span class="hero-kpi-label">Tareas Completadas</span>
+            </div>
+          </div>
+
+          <!-- 3. En Curso (Casilla Combinada Grande) -->
+          <div class="hero-kpi-item hero-kpi-dual">
+            <div class="hero-kpi-dual-top">
+              <div class="hero-kpi-icon icon-progress-ontime">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              </div>
+              <div class="hero-kpi-dual-title">
+                <span class="hero-kpi-label-heading">En Curso</span>
+                <span class="hero-kpi-total-badge" id="kpi-progress-total">--</span>
+              </div>
+            </div>
+            <div class="hero-kpi-dual-cols">
+              <div class="hero-kpi-sub-item">
+                <span class="hero-kpi-sub-label">(a tiempo)</span>
+                <span class="hero-kpi-sub-val val-blue" id="kpi-progress-ontime-tasks">--</span>
+              </div>
+              <div class="hero-kpi-sub-divider"></div>
+              <div class="hero-kpi-sub-item">
+                <span class="hero-kpi-sub-label">(retrasadas)</span>
+                <span class="hero-kpi-sub-val val-orange" id="kpi-progress-late-tasks">--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. No Iniciadas (Casilla Combinada Grande) -->
+          <div class="hero-kpi-item hero-kpi-dual">
+            <div class="hero-kpi-dual-top">
+              <div class="hero-kpi-icon icon-unstarted-ontime">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><circle cx="8" cy="8" r="3"/></svg>
+              </div>
+              <div class="hero-kpi-dual-title">
+                <span class="hero-kpi-label-heading">No Iniciadas</span>
+                <span class="hero-kpi-total-badge" id="kpi-unstarted-total">--</span>
+              </div>
+            </div>
+            <div class="hero-kpi-dual-cols">
+              <div class="hero-kpi-sub-item">
+                <span class="hero-kpi-sub-label">(a tiempo)</span>
+                <span class="hero-kpi-sub-val val-slate" id="kpi-unstarted-ontime-tasks">--</span>
+              </div>
+              <div class="hero-kpi-sub-divider"></div>
+              <div class="hero-kpi-sub-item">
+                <span class="hero-kpi-sub-label">(retrasadas)</span>
+                <span class="hero-kpi-sub-val val-red" id="kpi-unstarted-late-tasks">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjetas de Navegación por Área / Sección -->
+      <div class="home-sections-grid">
+        
+        <!-- Tarjeta HUBS -->
+        <div class="section-action-card card-hubs">
+          <div>
+            <div class="action-card-header">
+              <svg width="24" height="24" fill="#0369a1" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h11A1.5 1.5 0 0 1 15 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-11z"/></svg>
+            </div>
+            <h2 class="action-card-title" id="card-hubs-title">Seguimiento HUBs <span id="card-hubs-count-badge" class="action-card-count-badge">(26 HUBs)</span></h2>
+            <p class="action-card-desc">
+              Consolidación de <strong>Nuevos Proyectos</strong> (<span id="card-hubs-desc-nuevos">6</span> HUBs) y <strong>Operaciones</strong> (<span id="card-hubs-desc-ops">20</span> HUBs). Seguimiento de construcción, adecuación y mejoras.
+            </p>
+
+            <div class="action-card-progress-box">
+              <div class="progress-box-top">
+                <span class="progress-box-label">Avance Global HUBs</span>
+                <span class="progress-box-val" id="card-hubs-percent">--%</span>
+              </div>
+              <div class="custom-progress-bar">
+                <div class="custom-progress-fill fill-hubs" id="card-hubs-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="card-stats-row">
+              <div class="mini-stat-item">
+                <span class="mini-stat-val" id="card-hubs-stat-total">--</span>
+                <span class="mini-stat-label">Tareas Totales</span>
+              </div>
+              <div class="mini-stat-item">
+                <span class="mini-stat-val" style="color: #16a34a;" id="card-hubs-stat-done">--</span>
+                <span class="mini-stat-label">Completadas</span>
+              </div>
+              <div class="mini-stat-item mini-stat-combined">
+                <div class="mini-combined-header">
+                  <span class="mini-stat-label-heading">En Curso</span>
+                </div>
+                <div class="mini-combined-cols">
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(a tiempo)</span>
+                    <span class="mini-sub-val" style="color: #0284c7;" id="card-hubs-stat-prog-ontime">--</span>
+                  </div>
+                  <div class="mini-sub-divider"></div>
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(retrasadas)</span>
+                    <span class="mini-sub-val" style="color: #ea580c;" id="card-hubs-stat-prog-late">--</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-stat-item mini-stat-combined">
+                <div class="mini-combined-header">
+                  <span class="mini-stat-label-heading">No Iniciadas</span>
+                </div>
+                <div class="mini-combined-cols">
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(a tiempo)</span>
+                    <span class="mini-sub-val" style="color: #64748b;" id="card-hubs-stat-unstarted-ontime">--</span>
+                  </div>
+                  <div class="mini-sub-divider"></div>
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(retrasadas)</span>
+                    <span class="mini-sub-val" style="color: #dc2626;" id="card-hubs-stat-unstarted-late">--</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-card-buttons">
+            <button class="btn-card-primary" id="btn-goto-hubs">
+              <span>Ver Reporte HUBS</span>
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta ENLACES -->
+        <div class="section-action-card card-enlaces">
+          <div>
+            <div class="action-card-header">
+              <svg width="24" height="24" fill="#1e40af" viewBox="0 0 16 16"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L7.335 10.994a2 2 0 0 1-2.828-2.828l1.372-1.372a2.001 2.001 0 0 1-.164-.252z"/></svg>
+            </div>
+            <h2 class="action-card-title" id="card-enlaces-title">Enlaces Troncales <span id="card-enlaces-count-badge" class="action-card-count-badge">(2 Enlaces)</span></h2>
+            <p class="action-card-desc">
+              Seguimiento a la recuperación óptica, certificación reflectométrica (OTDR) y adecuación de mangas en anillos y troncales.
+            </p>
+
+            <div class="action-card-progress-box">
+              <div class="progress-box-top">
+                <span class="progress-box-label">Avance Global Enlaces</span>
+                <span class="progress-box-val" id="card-enlaces-percent">--%</span>
+              </div>
+              <div class="custom-progress-bar">
+                <div class="custom-progress-fill fill-enlaces" id="card-enlaces-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="card-stats-row">
+              <div class="mini-stat-item">
+                <span class="mini-stat-val" id="card-enlaces-stat-total">--</span>
+                <span class="mini-stat-label">Tareas Totales</span>
+              </div>
+              <div class="mini-stat-item">
+                <span class="mini-stat-val" style="color: #16a34a;" id="card-enlaces-stat-done">--</span>
+                <span class="mini-stat-label">Completadas</span>
+              </div>
+              <div class="mini-stat-item mini-stat-combined">
+                <div class="mini-combined-header">
+                  <span class="mini-stat-label-heading">En Curso</span>
+                </div>
+                <div class="mini-combined-cols">
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(a tiempo)</span>
+                    <span class="mini-sub-val" style="color: #0284c7;" id="card-enlaces-stat-prog-ontime">--</span>
+                  </div>
+                  <div class="mini-sub-divider"></div>
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(retrasadas)</span>
+                    <span class="mini-sub-val" style="color: #ea580c;" id="card-enlaces-stat-prog-late">--</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-stat-item mini-stat-combined">
+                <div class="mini-combined-header">
+                  <span class="mini-stat-label-heading">No Iniciadas</span>
+                </div>
+                <div class="mini-combined-cols">
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(a tiempo)</span>
+                    <span class="mini-sub-val" style="color: #64748b;" id="card-enlaces-stat-unstarted-ontime">--</span>
+                  </div>
+                  <div class="mini-sub-divider"></div>
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(retrasadas)</span>
+                    <span class="mini-sub-val" style="color: #dc2626;" id="card-enlaces-stat-unstarted-late">--</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-card-buttons">
+            <button class="btn-card-primary" id="btn-goto-enlaces">
+              <span>Ver Reporte Enlaces</span>
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjeta NOC -->
+        <div class="section-action-card card-noc">
+          <div>
+            <div class="action-card-header">
+              <svg width="24" height="24" fill="#0f172a" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4z"/></svg>
+            </div>
+            <h2 class="action-card-title">NOC - Red IP</h2>
+            <p class="action-card-desc">
+              Control técnico por departamento: Arquitectura BNG, Core, Salidas Internacionales, DDoS y Ranking Nperf/Speedtest.
+            </p>
+
+            <div class="action-card-progress-box">
+              <div class="progress-box-top">
+                <span class="progress-box-label">Avance Global NOC</span>
+                <span class="progress-box-val" id="card-noc-percent">--%</span>
+              </div>
+              <div class="custom-progress-bar">
+                <div class="custom-progress-fill fill-noc" id="card-noc-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="card-stats-row">
+              <div class="mini-stat-item">
+                <span class="mini-stat-val" id="card-noc-stat-total">--</span>
+                <span class="mini-stat-label">Tareas Totales</span>
+              </div>
+              <div class="mini-stat-item">
+                <span class="mini-stat-val" style="color: #16a34a;" id="card-noc-stat-done">--</span>
+                <span class="mini-stat-label">Completadas</span>
+              </div>
+              <div class="mini-stat-item mini-stat-combined">
+                <div class="mini-combined-header">
+                  <span class="mini-stat-label-heading">En Curso</span>
+                </div>
+                <div class="mini-combined-cols">
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(a tiempo)</span>
+                    <span class="mini-sub-val" style="color: #0284c7;" id="card-noc-stat-prog-ontime">--</span>
+                  </div>
+                  <div class="mini-sub-divider"></div>
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(retrasadas)</span>
+                    <span class="mini-sub-val" style="color: #ea580c;" id="card-noc-stat-prog-late">--</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-stat-item mini-stat-combined">
+                <div class="mini-combined-header">
+                  <span class="mini-stat-label-heading">No Iniciadas</span>
+                </div>
+                <div class="mini-combined-cols">
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(a tiempo)</span>
+                    <span class="mini-sub-val" style="color: #64748b;" id="card-noc-stat-unstarted-ontime">--</span>
+                  </div>
+                  <div class="mini-sub-divider"></div>
+                  <div class="mini-sub-col">
+                    <span class="mini-sub-label">(retrasadas)</span>
+                    <span class="mini-sub-val" style="color: #dc2626;" id="card-noc-stat-unstarted-late">--</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-card-buttons">
+            <button class="btn-card-primary" id="btn-goto-noc">
+              <span>Ver Reporte NOC</span>
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Gráficos del Portafolio Global -->
+      <div class="charts-grid-home">
+        <div class="chart-card">
+          <h3 class="chart-title">
+            <svg width="18" height="18" fill="#0284c7" viewBox="0 0 16 16"><path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/></svg>
+            Avance Comparativo por Sección (%)
+          </h3>
+          <div class="chart-container-rel">
+            <canvas id="chart-comparativo-canvas"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-title">
+            <svg width="18" height="18" fill="#0284c7" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3.5a.5.5 0 0 1-.5-.5v-4A.5.5 0 0 1 8 4z"/></svg>
+            Distribución de Tareas por Estado
+          </h3>
+          <div class="chart-container-rel">
+            <canvas id="chart-estados-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+
+
+    </section>
+
+
+    <!-- ----------------------------------------------------------------------
+         VISTA 2: REPORTE DE HUBS (FORMATO EXACTO HUBS.PDF)
+         ---------------------------------------------------------------------- -->
+    <section id="view-hubs" class="view-section">
+      
+      <!-- Barra superior de acciones -->
+      <div class="section-header-bar">
+        <button class="btn-back btn-back-general">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+          Volver al Inicio
+        </button>
+
+        <div style="display: flex; gap: 10px;">
+          <button class="btn-print" id="btn-print-hubs">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+            Descargar Reporte HUBS (PDF)
+          </button>
+          <button class="btn-excel-export" id="btn-excel-hubs">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/><path d="M5.18 10.368 6.56 8.28 5.28 6.2h1.44l.64 1.168.648-1.168h1.44L8.168 8.28l1.38 2.088H8.108L7.36 9.112l-.748 1.256H5.18z"/></svg>
+            Excel
+          </button>
+        </div>
+      </div>
+
+      <!-- Cabecera Gráfica Estilo hubs.pdf -->
+      <div class="pdf-style-header">
+        <div class="pdf-header-toplines"></div>
+        <div class="pdf-header-midline"></div>
+        <div class="pdf-header-banner-body">
+          <div class="pdf-header-geom-accent">
+            <div class="pdf-geom-trapezoid"></div>
+          </div>
+          <div class="pdf-header-titles-right">
+            <div class="pdf-report-label">Reporte de Estatus</div>
+            <div class="pdf-report-main-title">Implementación y Operaciones HUBs</div>
+            <div class="pdf-report-date" id="hubs-report-date">Generado el: Martes, 27 de Octubre de 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div class="filter-tabs-container">
+          <button class="tab-pill hubs-tab-btn active" data-tab="consolidado" id="hubs-tab-btn-consolidado">Todos los HUBs (<span id="hubs-tab-count-consolidado">26</span>)</button>
+          <button class="tab-pill hubs-tab-btn" data-tab="nuevos" id="hubs-tab-btn-nuevos">Nuevos Proyectos (<span id="hubs-tab-count-nuevos">6</span> HUBs)</button>
+          <button class="tab-pill hubs-tab-btn" data-tab="operaciones" id="hubs-tab-btn-operaciones">Operaciones (<span id="hubs-tab-count-operaciones">20</span> HUBs)</button>
+        </div>
+
+        <div class="search-filter-box hubs-filters-right">
+          <!-- Filtro Desplegable por Responsable (Selección directa sin teclear) -->
+          <div class="responsable-filter-container">
+            <div class="responsable-select-wrapper">
+              <svg class="responsable-icon-pos" width="16" height="16" fill="#0284c7" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              </svg>
+              <select id="hubs-responsable-select" class="responsable-select-dropdown" aria-label="Filtrar por Responsable" title="Seleccione un responsable de la lista">
+                <option value="">👤 Todos los Responsables</option>
+              </select>
+            </div>
+            <button id="btn-clear-responsable-filter" class="btn-clear-select" style="display: none;" title="Quitar filtro de responsable">✕</button>
+          </div>
+
+          <!-- Búsqueda textual complementaria -->
+          <div class="search-input-wrapper">
+            <svg class="search-icon-pos" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>
+            <input type="text" class="view-search-input" id="hubs-text-search" placeholder="Buscar tarea o HUB...">
+          </div>
+        </div>
+      </div>
+
+      <!-- BOX 1: RESUMEN DE AVANCE POR HUB (Exacto hubs.pdf) -->
+      <div class="hubs-pdf-box">
+        <div class="hubs-pdf-box-header">
+          <span class="hubs-pdf-box-title">Resumen de Avance por HUB</span>
+          <div class="hubs-pdf-header-badges">
+            <span class="badge-pdf-counter" id="hubs-badge-total">Total HUBs: 6</span>
+            <span class="badge-pdf-global-advance advance-blue" id="hubs-badge-global-advance">Avance Global: 60%</span>
+          </div>
+        </div>
+
+        <!-- Grid de Tarjetas Mini HUB -->
+        <div class="hubs-cards-grid" id="hubs-mini-cards-grid">
+          <!-- Renderizado dinámico -->
+        </div>
+      </div>
+
+      <!-- BOX 2: RESUMEN DE TAREAS (Exacto hubs.pdf + Filtrable) -->
+      <div class="tasks-summary-box">
+        <div class="tasks-summary-box-top">
+          <div>
+            <div class="hubs-pdf-box-title">Resumen de Tareas</div>
+            <p class="tasks-summary-hint">Haz clic en cualquiera de las 4 tarjetas para filtrar los HUBs por ese tipo de tarea:</p>
+          </div>
+          <button id="btn-clear-hubs-filter" class="btn-clear-task-filter" style="display: none;">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+            <span>Quitar Filtros (Ver Todas)</span>
+          </button>
+        </div>
+        <div class="tasks-summary-grid">
+          <!-- 1. Tareas Totales -->
+          <div class="kpi-pdf-box kpi-filter-box box-total" id="kpi-btn-hubs-total" data-status="total" role="button" tabindex="0" title="Ver todas las tareas">
+            <span class="kpi-pdf-box-val" id="hubs-kpi-total">0</span>
+            <span class="kpi-pdf-box-label">Tareas Totales</span>
+          </div>
+
+          <!-- 2. Completadas -->
+          <div class="kpi-pdf-box kpi-filter-box box-completadas" id="kpi-btn-hubs-completadas" data-status="completadas" role="button" tabindex="0" title="Filtrar por tareas Completadas">
+            <span class="kpi-pdf-box-val" id="hubs-kpi-completadas">0</span>
+            <span class="kpi-pdf-box-label">Completadas</span>
+          </div>
+
+          <!-- 3. En Curso (Combinada: a tiempo y retrasadas) -->
+          <div class="kpi-pdf-box kpi-pdf-box-combined box-en-curso" id="kpi-card-hubs-en-curso">
+            <div class="kpi-combined-title-row" id="kpi-btn-hubs-en-curso" data-status="en_curso" role="button" tabindex="0" title="Filtrar por todas las tareas En Curso">
+              <span class="kpi-pdf-box-label">En Curso</span>
+              <span class="kpi-combined-total-badge" id="hubs-kpi-en-curso-total">0</span>
+            </div>
+            <div class="kpi-combined-split-cols">
+              <div class="kpi-split-sub-col" id="kpi-btn-hubs-en-curso-ontime" data-status="en_curso_ontime" role="button" tabindex="0" title="Filtrar por tareas En Curso (A Tiempo)">
+                <span class="kpi-split-sub-label">(a tiempo)</span>
+                <span class="kpi-split-sub-val val-blue" id="hubs-kpi-en-curso-ontime">0</span>
+              </div>
+              <div class="kpi-split-divider"></div>
+              <div class="kpi-split-sub-col" id="kpi-btn-hubs-en-curso-late" data-status="en_curso_late" role="button" tabindex="0" title="Filtrar por tareas En Curso (Retrasadas)">
+                <span class="kpi-split-sub-label">(retrasadas)</span>
+                <span class="kpi-split-sub-val val-orange" id="hubs-kpi-en-curso-late">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. No Iniciadas (Combinada: a tiempo y retrasadas) -->
+          <div class="kpi-pdf-box kpi-pdf-box-combined box-no-iniciadas" id="kpi-card-hubs-no-iniciadas">
+            <div class="kpi-combined-title-row" id="kpi-btn-hubs-no-iniciadas" data-status="no_iniciadas" role="button" tabindex="0" title="Filtrar por todas las tareas No Iniciadas">
+              <span class="kpi-pdf-box-label">No Iniciadas</span>
+              <span class="kpi-combined-total-badge" id="hubs-kpi-no-iniciadas-total">0</span>
+            </div>
+            <div class="kpi-combined-split-cols">
+              <div class="kpi-split-sub-col" id="kpi-btn-hubs-no-iniciadas-ontime" data-status="no_iniciadas_ontime" role="button" tabindex="0" title="Filtrar por tareas No Iniciadas (A Tiempo)">
+                <span class="kpi-split-sub-label">(a tiempo)</span>
+                <span class="kpi-split-sub-val val-slate" id="hubs-kpi-no-iniciadas-ontime">0</span>
+              </div>
+              <div class="kpi-split-divider"></div>
+              <div class="kpi-split-sub-col" id="kpi-btn-hubs-no-iniciadas-late" data-status="no_iniciadas_late" role="button" tabindex="0" title="Filtrar por tareas No Iniciadas (Retrasadas)">
+                <span class="kpi-split-sub-label">(retrasadas)</span>
+                <span class="kpi-split-sub-val val-red" id="hubs-kpi-no-iniciadas-late">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner de Filtro Activo de Tareas -->
+      <div id="hubs-active-filter-indicator" class="active-filter-indicator" style="display: none;">
+        <div>
+          <span>Filtro de Tareas Activo: <strong id="hubs-active-filter-label">-</strong> &bull; Mostrando <strong id="hubs-matching-count">0</strong> HUB(s) que contienen este tipo de tarea</span>
+        </div>
+        <button id="btn-clear-hubs-filter-banner" class="btn-clear-pill">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+          Quitar Filtro
+        </button>
+      </div>
+
+      <!-- SECCIONES DETALLADAS POR CADA HUB (Exacto hubs.pdf + Responsables) -->
+      <div id="hubs-detailed-cards-container">
+        <!-- Renderizado dinámico de tarjetas con tabla -->
+      </div>
+
+    </section>
+
+
+    <!-- ----------------------------------------------------------------------
+         VISTA 3: REPORTE DE ENLACES TRONCALES (ESTRUCTURA HUBS.PDF)
+         ---------------------------------------------------------------------- -->
+    <section id="view-enlaces" class="view-section">
+      
+      <!-- Barra superior de acciones -->
+      <div class="section-header-bar">
+        <button class="btn-back btn-back-general">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+          Volver al Inicio
+        </button>
+
+        <div style="display: flex; gap: 10px;">
+          <button class="btn-print" id="btn-print-enlaces">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+            Descargar Reporte Enlaces (PDF)
+          </button>
+          <button class="btn-excel-export" id="btn-excel-enlaces">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/><path d="M5.18 10.368 6.56 8.28 5.28 6.2h1.44l.64 1.168.648-1.168h1.44L8.168 8.28l1.38 2.088H8.108L7.36 9.112l-.748 1.256H5.18z"/></svg>
+            Excel
+          </button>
+        </div>
+      </div>
+
+      <!-- Cabecera Gráfica para Enlaces -->
+      <div class="pdf-style-header">
+        <div class="pdf-header-toplines" style="background: #0284c7;"></div>
+        <div class="pdf-header-midline" style="background: #112d4e;"></div>
+        <div class="pdf-header-banner-body">
+          <div class="pdf-header-geom-accent">
+            <div class="pdf-geom-trapezoid" style="background: #112d4e;"></div>
+          </div>
+          <div class="pdf-header-titles-right">
+            <div class="pdf-report-label">Reporte de Estatus</div>
+            <div class="pdf-report-main-title">Enlaces Troncales de Transporte</div>
+            <div class="pdf-report-date" id="enlaces-report-date">Operaciones y Nuevos Proyectos &bull; Generado el: Martes, 27 de Octubre de 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div class="filter-tabs-container">
+          <button class="tab-pill enlaces-tab-btn active" data-tab="consolidado" id="enlaces-tab-btn-consolidado">Todos los Enlaces (<span id="enlaces-tab-count-consolidado">5</span>)</button>
+          <button class="tab-pill enlaces-tab-btn" data-tab="operaciones" id="enlaces-tab-btn-operaciones">Operaciones (<span id="enlaces-tab-count-operaciones">5</span>)</button>
+          <button class="tab-pill enlaces-tab-btn" data-tab="nuevos" id="enlaces-tab-btn-nuevos">Nuevos Proyectos (<span id="enlaces-tab-count-nuevos">0</span>)</button>
+        </div>
+
+        <div class="search-filter-box hubs-filters-right">
+          <!-- Filtro Desplegable por Responsable (Selección directa sin teclear) -->
+          <div class="responsable-filter-container">
+            <div class="responsable-select-wrapper">
+              <svg class="responsable-icon-pos" width="16" height="16" fill="#0284c7" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              </svg>
+              <select id="enlaces-responsable-select" class="responsable-select-dropdown" aria-label="Filtrar por Responsable" title="Seleccione un responsable de la lista">
+                <option value="">👤 Todos los Responsables</option>
+              </select>
+            </div>
+            <button id="btn-clear-enlaces-responsable-filter" class="btn-clear-select" style="display: none;" title="Quitar filtro de responsable">✕</button>
+          </div>
+
+          <!-- Búsqueda textual complementaria -->
+          <div class="search-input-wrapper">
+            <svg class="search-icon-pos" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>
+            <input type="text" class="view-search-input" id="enlaces-text-search" placeholder="Buscar enlace o tarea...">
+          </div>
+        </div>
+      </div>
+
+      <!-- BOX 1: RESUMEN DE AVANCE POR ENLACE -->
+      <div class="hubs-pdf-box">
+        <div class="hubs-pdf-box-header">
+          <span class="hubs-pdf-box-title">Resumen de Avance por Enlace Troncal</span>
+          <div class="hubs-pdf-header-badges">
+            <span class="badge-pdf-counter" id="enlaces-badge-total">Total Enlaces: --</span>
+            <span class="badge-pdf-global-advance advance-blue" id="enlaces-badge-global-advance">Avance Global: --%</span>
+          </div>
+        </div>
+
+        <div class="hubs-cards-grid" id="enlaces-mini-cards-grid">
+          <!-- Renderizado dinámico -->
+        </div>
+      </div>
+
+      <!-- BOX 2: RESUMEN DE TAREAS EN ENLACES (Filtrable) -->
+      <div class="tasks-summary-box">
+        <div class="tasks-summary-box-top">
+          <div>
+            <div class="hubs-pdf-box-title">Resumen de Tareas en Enlaces</div>
+            <p class="tasks-summary-hint">Haz clic en cualquier tarjeta para filtrar los enlaces por ese tipo de tarea:</p>
+          </div>
+          <button id="btn-clear-enlaces-filter" class="btn-clear-task-filter" style="display: none;">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+            <span>Quitar Filtros (Ver Todas)</span>
+          </button>
+        </div>
+        <div class="tasks-summary-grid">
+          <!-- 1. Tareas Totales -->
+          <div class="kpi-pdf-box kpi-filter-box box-total" id="kpi-btn-enlaces-total" data-status="total" role="button" tabindex="0" title="Ver todas las tareas">
+            <span class="kpi-pdf-box-val" id="enlaces-kpi-total">0</span>
+            <span class="kpi-pdf-box-label">Tareas Totales</span>
+          </div>
+
+          <!-- 2. Completadas -->
+          <div class="kpi-pdf-box kpi-filter-box box-completadas" id="kpi-btn-enlaces-completadas" data-status="completadas" role="button" tabindex="0" title="Filtrar por tareas Completadas">
+            <span class="kpi-pdf-box-val" id="enlaces-kpi-completadas">0</span>
+            <span class="kpi-pdf-box-label">Completadas</span>
+          </div>
+
+          <!-- 3. En Curso (Combinada: a tiempo y retrasadas) -->
+          <div class="kpi-pdf-box kpi-pdf-box-combined box-en-curso" id="kpi-card-enlaces-en-curso">
+            <div class="kpi-combined-title-row" id="kpi-btn-enlaces-en-curso" data-status="en_curso" role="button" tabindex="0" title="Filtrar por todas las tareas En Curso">
+              <span class="kpi-pdf-box-label">En Curso</span>
+              <span class="kpi-combined-total-badge" id="enlaces-kpi-en-curso-total">0</span>
+            </div>
+            <div class="kpi-combined-split-cols">
+              <div class="kpi-split-sub-col" id="kpi-btn-enlaces-en-curso-ontime" data-status="en_curso_ontime" role="button" tabindex="0" title="Filtrar por tareas En Curso (A Tiempo)">
+                <span class="kpi-split-sub-label">(a tiempo)</span>
+                <span class="kpi-split-sub-val val-blue" id="enlaces-kpi-en-curso-ontime">0</span>
+              </div>
+              <div class="kpi-split-divider"></div>
+              <div class="kpi-split-sub-col" id="kpi-btn-enlaces-en-curso-late" data-status="en_curso_late" role="button" tabindex="0" title="Filtrar por tareas En Curso (Retrasadas)">
+                <span class="kpi-split-sub-label">(retrasadas)</span>
+                <span class="kpi-split-sub-val val-orange" id="enlaces-kpi-en-curso-late">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. No Iniciadas (Combinada: a tiempo y retrasadas) -->
+          <div class="kpi-pdf-box kpi-pdf-box-combined box-no-iniciadas" id="kpi-card-enlaces-no-iniciadas">
+            <div class="kpi-combined-title-row" id="kpi-btn-enlaces-no-iniciadas" data-status="no_iniciadas" role="button" tabindex="0" title="Filtrar por todas las tareas No Iniciadas">
+              <span class="kpi-pdf-box-label">No Iniciadas</span>
+              <span class="kpi-combined-total-badge" id="enlaces-kpi-no-iniciadas-total">0</span>
+            </div>
+            <div class="kpi-combined-split-cols">
+              <div class="kpi-split-sub-col" id="kpi-btn-enlaces-no-iniciadas-ontime" data-status="no_iniciadas_ontime" role="button" tabindex="0" title="Filtrar por tareas No Iniciadas (A Tiempo)">
+                <span class="kpi-split-sub-label">(a tiempo)</span>
+                <span class="kpi-split-sub-val val-slate" id="enlaces-kpi-no-iniciadas-ontime">0</span>
+              </div>
+              <div class="kpi-split-divider"></div>
+              <div class="kpi-split-sub-col" id="kpi-btn-enlaces-no-iniciadas-late" data-status="no_iniciadas_late" role="button" tabindex="0" title="Filtrar por tareas No Iniciadas (Retrasadas)">
+                <span class="kpi-split-sub-label">(retrasadas)</span>
+                <span class="kpi-split-sub-val val-red" id="enlaces-kpi-no-iniciadas-late">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner de Filtro Activo de Tareas en Enlaces -->
+      <div id="enlaces-active-filter-indicator" class="active-filter-indicator" style="display: none;">
+        <div>
+          <span>Filtro de Tareas Activo: <strong id="enlaces-active-filter-label">-</strong> &bull; Mostrando <strong id="enlaces-matching-count">0</strong> enlace(s)</span>
+        </div>
+        <button id="btn-clear-enlaces-filter-banner" class="btn-clear-pill">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+          Quitar Filtro
+        </button>
+      </div>
+
+      <!-- SECCIONES DETALLADAS POR CADA ENLACE -->
+      <div id="enlaces-detailed-cards-container">
+        <!-- Renderizado dinámico de tarjetas de enlace -->
+      </div>
+
+    </section>
+
+
+    <!-- ----------------------------------------------------------------------
+         VISTA 4: REPORTE DE NOC (FORMATO EXACTO NOC.PDF)
+         ---------------------------------------------------------------------- -->
+    <section id="view-noc" class="view-section">
+      
+      <!-- Barra superior de acciones -->
+      <div class="section-header-bar">
+        <button class="btn-back btn-back-general">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+          Volver al Inicio
+        </button>
+
+        <div style="display: flex; gap: 10px;">
+          <button class="btn-print" id="btn-print-noc">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+            Descargar Reporte NOC (PDF)
+          </button>
+          <button class="btn-excel-export" id="btn-excel-noc">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/><path d="M5.18 10.368 6.56 8.28 5.28 6.2h1.44l.64 1.168.648-1.168h1.44L8.168 8.28l1.38 2.088H8.108L7.36 9.112l-.748 1.256H5.18z"/></svg>
+            Excel
+          </button>
+        </div>
+      </div>
+
+      <!-- Cabecera Gráfica Estilo Reporte PMO (Exacto a HUBs y Enlaces) -->
+      <div class="pdf-style-header">
+        <div class="pdf-header-toplines"></div>
+        <div class="pdf-header-midline"></div>
+        <div class="pdf-header-banner-body">
+          <div class="pdf-header-geom-accent">
+            <div class="pdf-geom-trapezoid"></div>
+          </div>
+          <div class="pdf-header-titles-right">
+            <div class="pdf-report-label">Reporte de Estatus</div>
+            <div class="pdf-report-main-title">
+              Optimización Red IP (NOC) <span class="badge-pdf-global-advance advance-blue" id="noc-badge-global-advance">Avance Global: --%</span>
+            </div>
+            <div class="pdf-report-date" id="noc-report-date">Comité de Dirección &bull; Generado el: Martes, 27 de Octubre de 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+        <div class="filter-tabs-container">
+          <button class="tab-pill noc-tab-btn active" data-dept="all" id="noc-tab-btn-all">Todas las Tareas (<span id="noc-tab-count-all">61</span>)</button>
+        </div>
+
+        <div class="search-filter-box hubs-filters-right">
+          <!-- Filtro Desplegable por Responsable (Selección directa sin teclear) -->
+          <div class="responsable-filter-container">
+            <div class="responsable-select-wrapper">
+              <svg class="responsable-icon-pos" width="16" height="16" fill="#0284c7" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              </svg>
+              <select id="noc-responsable-select" class="responsable-select-dropdown" aria-label="Filtrar por Responsable" title="Seleccione un responsable de la lista">
+                <option value="">👥 Todos los Responsables</option>
+              </select>
+            </div>
+            <button id="btn-clear-noc-responsable-filter" class="btn-clear-select" style="display: none;" title="Quitar filtro de responsable">✕</button>
+          </div>
+
+          <!-- Búsqueda textual complementaria -->
+          <div class="search-input-wrapper">
+            <svg class="search-icon-pos" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>
+            <input type="text" class="view-search-input" id="noc-text-search" placeholder="Buscar tarea o departamento...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 4 KPIs Grandes (Filtrable por Estatus) -->
+      <div class="noc-kpis-grid">
+        <!-- 1. Total Tareas -->
+        <div class="noc-kpi-card kpi-filter-box" id="kpi-btn-noc-total" data-status="total" role="button" tabindex="0" title="Ver todas las tareas">
+          <span class="noc-kpi-title">TOTAL TAREAS</span>
+          <span class="noc-kpi-val" id="noc-kpi-total-val">60</span>
+          <span class="noc-kpi-caption">100% alcance del proyecto</span>
+          <div class="noc-kpi-icon-floating">📋</div>
+        </div>
+
+        <!-- 2. Completadas -->
+        <div class="noc-kpi-card noc-kpi-completed kpi-filter-box box-completadas" id="kpi-btn-noc-completadas" data-status="completadas" role="button" tabindex="0" title="Filtrar por tareas Completadas">
+          <span class="noc-kpi-title">COMPLETADAS</span>
+          <span class="noc-kpi-val" id="noc-kpi-done-val">16</span>
+          <span class="noc-kpi-caption">Ejecutadas con éxito</span>
+          <div class="noc-kpi-icon-floating">✅</div>
+        </div>
+
+        <!-- 3. En Curso (Combinada: a tiempo y retrasadas) -->
+        <div class="noc-kpi-card noc-kpi-combined noc-kpi-inprogress box-en-curso" id="kpi-card-noc-en-curso">
+          <div class="noc-kpi-combined-top" id="kpi-btn-noc-en-curso" data-status="en_curso" role="button" tabindex="0" title="Filtrar por todas las tareas En Curso">
+            <span class="noc-kpi-title">TAREAS EN CURSO</span>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span class="kpi-combined-total-badge" id="noc-kpi-curso-total">30</span>
+              <span class="noc-kpi-icon-floating-rel">⏳</span>
+            </div>
+          </div>
+          <div class="noc-kpi-split-cols">
+            <div class="noc-kpi-sub-col" id="kpi-btn-noc-en-curso-ontime" data-status="en_curso_ontime" role="button" tabindex="0" title="Filtrar por En Curso (A Tiempo)">
+              <span class="noc-kpi-sub-label">(a tiempo)</span>
+              <span class="noc-kpi-sub-val val-blue" id="noc-kpi-curso-ontime">0</span>
+            </div>
+            <div class="noc-kpi-sub-divider"></div>
+            <div class="noc-kpi-sub-col" id="kpi-btn-noc-en-curso-late" data-status="en_curso_late" role="button" tabindex="0" title="Filtrar por En Curso (Retrasadas)">
+              <span class="noc-kpi-sub-label">(retrasadas)</span>
+              <span class="noc-kpi-sub-val val-orange" id="noc-kpi-curso-late">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. No Iniciadas (Combinada: a tiempo y retrasadas) -->
+        <div class="noc-kpi-card noc-kpi-combined noc-kpi-notstarted box-no-iniciadas" id="kpi-card-noc-no-iniciadas">
+          <div class="noc-kpi-combined-top" id="kpi-btn-noc-no-iniciadas" data-status="no_iniciadas" role="button" tabindex="0" title="Filtrar por todas las tareas No Iniciadas">
+            <span class="noc-kpi-title">NO INICIADAS</span>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span class="kpi-combined-total-badge" id="noc-kpi-notstarted-total">0</span>
+              <span class="noc-kpi-icon-floating-rel">⏸️</span>
+            </div>
+          </div>
+          <div class="noc-kpi-split-cols">
+            <div class="noc-kpi-sub-col" id="kpi-btn-noc-no-iniciadas-ontime" data-status="no_iniciadas_ontime" role="button" tabindex="0" title="Filtrar por No Iniciadas (A Tiempo)">
+              <span class="noc-kpi-sub-label">(a tiempo)</span>
+              <span class="noc-kpi-sub-val val-slate" id="noc-kpi-notstarted-ontime">0</span>
+            </div>
+            <div class="noc-kpi-sub-divider"></div>
+            <div class="noc-kpi-sub-col" id="kpi-btn-noc-no-iniciadas-late" data-status="no_iniciadas_late" role="button" tabindex="0" title="Filtrar por No Iniciadas (Retrasadas)">
+              <span class="noc-kpi-sub-label">(retrasadas)</span>
+              <span class="noc-kpi-sub-val val-red" id="noc-kpi-notstarted-late">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner de Filtro Activo de Tareas NOC -->
+      <div id="noc-active-task-filter-indicator" class="active-filter-indicator" style="display: none; margin-bottom: 24px;">
+        <div>
+          <span>Filtro de Tareas Activo: <strong id="noc-active-task-filter-label">-</strong> &bull; Mostrando <strong id="noc-matching-count">0</strong> tareas</span>
+        </div>
+        <button id="btn-clear-noc-task-filter-banner" class="btn-clear-pill">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+          Quitar Filtro
+        </button>
+      </div>
+
+      <!-- SECCIÓN: TAREAS URGENTES -->
+      <div class="noc-section-container" id="noc-urgent-section" style="border-left: 4px solid #e11d48;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <h3 class="noc-section-heading" style="margin-bottom: 4px; color: #9f1239;">
+              🔥 Tareas urgentes
+              <span class="noc-counter-pill pill-red-count" id="noc-urgent-total-badge">0 tareas urgentes</span>
+            </h3>
+            <p class="noc-section-instruction" style="margin-bottom: 0;">Haz clic en una barra para filtrar el dashboard por departamento.</p>
+          </div>
+          <div id="noc-urgent-filter-indicator" style="display: none;">
+            <div class="filter-active-pill" style="margin: 0; background: #ffe4e6; color: #9f1239; border-color: #fecdd3;">
+              <span>Filtrado por: <strong id="noc-urgent-filter-dept">-</strong></span>
+              <button id="btn-clear-noc-urgent-filter" title="Quitar filtro de departamento" style="color: #9f1239;">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 16px;">
+          <div class="chart-container-rel" style="height: 180px;">
+            <canvas id="chart-noc-urgent-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. DISTRIBUCIÓN DE CARGA POR DEPARTAMENTO -->
+      <div class="noc-section-container">
+        <h3 class="noc-section-heading">1. Distribución de Carga por Departamento</h3>
+        <p class="noc-section-instruction">Haz clic en cualquier departamento para filtrar las tareas del dashboard.</p>
+
+        <!-- Filtro activo pill -->
+        <div id="noc-active-filter-container" style="display: none;">
+          <div class="filter-active-pill">
+            <span>Filtro activo: <strong id="noc-filter-name-text">-</strong></span>
+            <button id="btn-clear-noc-filter" title="Eliminar filtro">✕</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="load-dist-table">
+            <thead>
+              <tr>
+                <th>DEPARTAMENTO / DEPÓSITO</th>
+                <th>TOTAL TAREAS</th>
+                <th>CARGA DE TRABAJO (PROPORCIÓN)</th>
+              </tr>
+            </thead>
+            <tbody id="noc-distribution-table-body">
+              <!-- Renderizado dinámico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2. ESTADO DETALLADO: AVANCE DE TAREAS Y SUBTAREAS -->
+      <div class="noc-section-container">
+        <h3 class="noc-section-heading">2. Estado Detallado: Avance de Tareas y Subtareas</h3>
+        <p class="noc-section-instruction">
+          Listado continuo de todas las tareas registradas en Planner, organizadas por estado. Se incluyen los departamentos y múltiples responsables etiquetados.
+        </p>
+
+        <!-- 2.1 Completadas -->
+        <div id="noc-subsection-completed">
+          <div class="noc-subsection-header">
+            <span style="color: #16a34a;">✅ 2.1 Tareas Completadas</span>
+            <span class="noc-counter-pill pill-green-count" id="noc-count-done-badge">0 elementos</span>
+          </div>
+          <div class="table-responsive">
+            <table class="hub-tasks-table noc-table-7col">
+              <thead>
+                <tr>
+                  <th>Nombre de la Tarea</th>
+                  <th>Avance</th>
+                  <th>Departamento</th>
+                  <th>Responsables</th>
+                  <th>Fecha Planificada</th>
+                  <th>Fecha Finalización</th>
+                  <th>Razón</th>
+                </tr>
+              </thead>
+              <tbody id="noc-table-completed-body">
+                <!-- Renderizado dinámico -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.2 En Curso -->
+        <div id="noc-subsection-inprogress" style="margin-top: 36px;">
+          <div class="noc-subsection-header">
+            <span style="color: #0284c7;">🔄 2.2 Tareas en Curso</span>
+            <span class="noc-counter-pill pill-blue-count" id="noc-count-prog-badge">0 elementos</span>
+            <span style="font-size: 11px; font-weight: 600; color: #dc2626; margin-left: 10px;">(Tareas a vencerse dentro de los próximos 3 días en ROJO)</span>
+          </div>
+          <div class="table-responsive">
+            <table class="hub-tasks-table noc-table-6col">
+              <thead>
+                <tr>
+                  <th>Nombre de la Tarea</th>
+                  <th>Avance</th>
+                  <th>Departamento</th>
+                  <th>Responsables</th>
+                  <th>Fecha Planificada</th>
+                  <th>Razón</th>
+                </tr>
+              </thead>
+              <tbody id="noc-table-inprogress-body">
+                <!-- Renderizado dinámico -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.3 Frentes de Trabajo con 0% de Avance (No Iniciados) -->
+        <div id="noc-subsection-notstarted" style="margin-top: 36px;">
+          <div class="noc-subsection-header">
+            <span style="color: #64748b;">⏸️ 2.3 Frentes de Trabajo con 0% de Avance (No Iniciados)</span>
+            <span class="noc-counter-pill pill-gray-count" id="noc-count-notstarted-badge">0 elementos</span>
+            <span style="font-size: 11px; font-weight: 600; color: #dc2626; margin-left: 10px;">(Tareas con retraso o a vencerse dentro de los próximos 3 días en ROJO)</span>
+          </div>
+          <div class="table-responsive">
+            <table class="hub-tasks-table noc-table-6col">
+              <thead>
+                <tr>
+                  <th>Nombre de la Tarea</th>
+                  <th>Avance</th>
+                  <th>Departamento</th>
+                  <th>Responsables</th>
+                  <th>Fecha Planificada</th>
+                  <th>Razón</th>
+                </tr>
+              </thead>
+              <tbody id="noc-table-notstarted-body">
+                <!-- Renderizado dinámico -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ALERTAS: TAREAS CON RETRASO (FUERA DE TIEMPO) -->
+      <div class="noc-section-container" id="noc-section-delayed" style="border-left: 4px solid #dc2626;">
+        <h3 class="noc-section-heading" style="color: #b91c1c;">
+          ⚠️ 3. Alertas: Tareas con Retraso (Fuera de Tiempo)
+          <span class="noc-counter-pill pill-red-count" id="noc-count-delayed-badge">0 elementos críticos</span>
+        </h3>
+        <p class="noc-section-instruction">Entregables vencidos con corte de fecha actual que presentan riesgo de bloqueo técnico.</p>
+
+        <div class="table-responsive">
+          <table class="hub-tasks-table noc-table-6col">
+            <thead>
+              <tr>
+                <th>Nombre de la Tarea</th>
+                <th>Avance</th>
+                <th>Departamento</th>
+                <th>Responsables</th>
+                <th>Fecha Planificada</th>
+                <th>Razón</th>
+              </tr>
+            </thead>
+            <tbody id="noc-table-delayed-body">
+              <!-- Renderizado dinámico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 4. ANÁLISIS GENERAL Y FACTORES CRÍTICOS DE RETRASO (PMO) -->
+      <div class="pmo-analysis-box">
+        <h3 class="analysis-header-title">
+          📊 4. Análisis General y Factores Críticos de Retraso (PMO)
+        </h3>
+        <p class="analysis-subtitle">Evaluación ejecutiva de riesgos basada en datos de Microsoft Planner</p>
+
+        <div class="analysis-cards-grid">
+          <!-- Item 1 -->
+          <div class="analysis-item-card">
+            <div class="analysis-item-title title-danger">
+              ⚠️ 1. Saturación por Dependencias Clave
+            </div>
+            <p class="analysis-item-text" id="pmo-overload-text">
+              Existen cuellos de botella marcados en roles específicos. Varios ingenieros y equipos clave aparecen simultáneamente en múltiples tareas de alta complejidad (BNG, Core, Salidas Internacionales), muchas de ellas ya vencidas. La sobreasignación está quebrando las fechas de entrega.
+            </p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="analysis-item-card">
+            <div class="analysis-item-title title-warning">
+              ⏳ 2. Retrasos en Actividades Fundacionales
+            </div>
+            <p class="analysis-item-text">
+              Tareas como "Auditoría integral de política BGP", "Auditar RPKI/ROAs" y optimización óptica de troncales son pre-requisitos técnicos esenciales. Su retraso arrastra en cascada las implementaciones subsecuentes como el "Plan de Migración a BNGs" y la "Optimización de Rutas".
+            </p>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="analysis-item-card">
+            <div class="analysis-item-title title-info">
+              📅 3. Tareas sin Deadline o Fechas Vagas (-)
+            </div>
+            <p class="analysis-item-text" id="pmo-undated-text">
+              Existe un bloque crítico de tareas sin fecha de vencimiento definida (-). En metodologías de dirección PMO, la ausencia de un compromiso temporal equivale a una tarea archivada que nunca escalará prioridad.
+            </p>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="analysis-item-card">
+            <div class="analysis-item-title title-warning">
+              ⚙️ 4. Avance "Fantasma" en Planner
+            </div>
+            <p class="analysis-item-text" id="pmo-phantom-text">
+              Se detectan tareas catalogadas "En Curso" pero con listas de comprobación estancadas en 0% (ej. 0/15 o 0/10). Esto indica que el ticket fue asignado administrativamente, pero no hay evidencia de avance técnico en campo o laboratorio.
+            </p>
+          </div>
+        </div>
+
+        <!-- Recomendaciones Directivas -->
+        <div class="recommendations-box">
+          <div class="recommendations-title">
+            🎯 Recomendaciones Inmediatas para Dirección y PMO
+          </div>
+          <ul class="recommendations-list">
+            <li><strong>War Room Urgente:</strong> Citar a Salidas Internacionales, Arquitectura BNG y O&M Troncales para establecer compromisos inamovibles sobre las tareas vencidas.</li>
+            <li><strong>Saneamiento de Planner:</strong> Prohibir el registro de tickets en estado "No Iniciado" o "En curso" sin una Fecha de Vencimiento definida (Due Date obligatorio).</li>
+            <li><strong>Liberación de Recursos:</strong> Reasignar temporalmente soporte operativo a los ingenieros más saturados para destrabar implementaciones con 60-80% de avance.</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Notificación Toast -->
+  <div id="toast-notification" class="toast-notification">Operación exitosa</div>
+
+  <!-- Bibliotecas Locales con Fallback CDN -->
+  <script src="assets/js/xlsx.full.min.js"></script>
+  <script>
+    if (typeof XLSX === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"><\/script>');
+    }
+  </script>
+
+  <script src="assets/js/chart.umd.min.js"></script>
+  <script>
+    if (typeof Chart === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- Datos Iniciales Embebidos y Lógica de la Aplicación -->
+  <script src="assets/js/initial_data.js"></script>
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>
